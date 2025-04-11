@@ -18,7 +18,15 @@ st.set_page_config(
 )
 
 # API configuration
-API_URL = "http://localhost:5000/api"  # Change this to your deployed API URL
+def get_api_url():
+    if os.getenv('STREAMLIT_CLOUD'):
+        # Production URL - replace with your actual deployed API URL
+        return "https://your-api-url.herokuapp.com/api"
+    else:
+        # Local development URL
+        return "http://localhost:5000/api"
+
+API_URL = get_api_url()
 
 def main():
     st.title("📚 Personal Library Manager")
